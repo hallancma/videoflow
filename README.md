@@ -38,11 +38,12 @@ Ou veja diretamente abaixo:
 
 ## 📚 Aulas Inclusas
 
-- **Aula 01:** Criação e personalização do canal  
-- **Aula 02:** Identidade visual e planos de fundo  
-- **Aula 03:** Cadastro de temas e roteiros  
-- **Aula 04:** Automatização do fluxo no n8n  
-- **Aula 05:** Publicação e análise de métricas
+- **Aula 01:** Criação de canal de short no Youtube do Zero  
+- **Aula 02:** Criação de Planilha de Acompanhamento  
+- **Aula 03:** Instalação do N8N,Ferramentas e credências necessárias.   
+- **Aula 04:** Criando base de vídeos, músicas e textos para serem utilizadas nos vídeos  
+- **Aula 05:** Criando vídeo e realizando upload para o Youtube
+- **Aula 06:** Bônus - Atualizando textos e descrição dos vídeos com IA
 
 ---
 
