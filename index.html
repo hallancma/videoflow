@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeto VideoFlow IA - 100% Grátis</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      line-height: 1.6;
+    }
+    header {
+      background: #202020;
+      padding: 20px;
+      text-align: center;
+
+    }
+    /* Título com borda animada em degradê */
+    header h1 {
+      position: relative;
+      display: inline-block;
+      padding: 10px 20px;
+      color: #fff;
+      background: #111;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      z-index: 1;
+      font-size: 3em;
+    }
+    header h1::before {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      background: linear-gradient(45deg, #2A7AE2, #8E44AD, #2A7AE2);
+      background-size: 300% 300%;
+      border-radius: inherit;
+      z-index: -1;
+      animation: borderAnimation 3s linear infinite;
+    }
+    @keyframes borderAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header p {
+      font-size: 1rem;
+      color: #ccc;
+    }
+    main {
+      max-width: 900px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+    /* Blocos de conteúdo */
+    section {
+      background: #1b1b1b;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+    /* Lista de Features */
+    .features ul {
+      list-style: none;
+    }
+    .features li {
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+    }
+    .features li::before {
+      content: '✔';
+      color: #00cc66;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    /* Bloco Video Flow */
+    .video-flow img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #333;
+      border-radius: 8px;
+    }
+    /* Seção de Aulas */
+    .lessons ul {
+      list-style: none;
+    }
+    .lessons li {
+      margin-bottom: 15px;
+    }
+    .lesson-number {
+      font-weight: bold;
+      margin-right: 5px;
+      color: #00cc66;
+    }
+    .video-link {
+      text-decoration: none;
+      color: #00cc66;
+      margin-left: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .video-link:hover {
+      color: #00a653;
+    }
+    /* Seção de Doação */
+    .donation {
+      text-align: center;
+    }
+    .donation img {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
+    .donation p {
+      margin: 10px 0;
+      color: #ccc;
+    }
+    .pix-key-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin: 10px 0;
+      flex-wrap: wrap;
+    }
+    .pix-key {
+      background: #2d2d2d;
+      padding: 10px 15px;
+      border-radius: 4px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .copy-btn {
+      background: #00cc66;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-weight: bold;
+    }
+    .copy-btn:hover {
+      background: #00a653;
+    }
+    /* Seção de Contato via WhatsApp */
+    .contact {
+      text-align: center;
+    }
+    .whatsapp-btn {
+      background: #25D366;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.3s;
+      margin-top: 15px;
+    }
+    .whatsapp-btn:hover {
+      background: #1DA851;
+    }
+    /* Modal para exibir o vídeo */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+    .modal-content {
+      position: relative;
+      background-color: #222;
+      margin: 5% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 8px;
+    }
+    .close-btn {
+      color: #fff;
+      font-size: 2rem;
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      cursor: pointer;
+    }
+    /* Container responsivo para o vídeo mantendo 16:9 */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    /* Responsividade adicional */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+      header p {
+        font-size: 0.9rem;
+      }
+      section h2 {
+        font-size: 1.3rem;
+      }
+      .features li, .lessons li {
+        font-size: 0.9rem;
+      }
+      .donation h2 {
+        font-size: 1.2rem;
+      }
+      .modal-content {
+        margin: 10% auto;
+      }
+    }
+.buy-now-button {
+  position: relative;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 18px 36px;
+  background: #111;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1.25rem; /* Tamanho maior de fonte */
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 12px; /* Borda mais arredondada */
+  z-index: 1;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  max-width: 100%;
+}
+
+.buy-now-button::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  background: linear-gradient(45deg, #ff5722, #ffc107, #ff5722);
+  background-size: 300% 300%;
+  border-radius: inherit;
+  z-index: -1;
+  animation: borderAnimation 3s linear infinite;
+}
+
+.buy-now-button:hover {
+  background: #ffc107;
+  color: #000;
+  transform: scale(1.05); /* Efeito sutil de crescimento no hover */
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Projeto VídeoFlow IA - 100% Grátis</h1>
+  </header>
+
+  <main>
+    <!-- Seção de destaques -->
+    <section class="features">
+      <h2>O que é o VídeoFlow IA?</h2>
+      <ul>
+        <li>Sistema automatizado de short para YouTube com vídeos, texto e áudio</li>
+        <li>Fluxo 100% gratuito e fácil de configurar</li>
+        <li>Geração de conteúdo em massa para engajamento</li>
+        <li>Mais alcance e crescimento do canal</li>
+      </ul>
+    </section>
+
+    <!-- Bloco Video Flow -->
+<section class="video-flow">
+  <h2>VídeoFlow IA - Introdução</h2>
+<div class="video-container">
+  <iframe 
+    src="https://www.youtube.com/embed/zpcj7h6lBag?autoplay=0&mute=0" 
+    title="Fluxo no n8n"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
+
+</section>
+
+
+    <!-- Seção de Aulas -->
+    <section class="lessons">
+      <h2>Aulas do Projeto:</h2>
+      <ul>
+        <!-- Use o atributo data-video com a URL de incorporação (embed) -->
+        <li>
+          <span class="lesson-number">Aula 01:</span>
+          Criação de canal de short no Youtube do Zero
+          <a href="#" class="video-link" data-video="https://www.youtube.com/embed/6BRD8cKoSec">
+            📺 Assistir
+          </a>
+        </li>
+        <li>
+          <span class="lesson-number">Aula 02:</span>
+          Criação de Planilha de Acompanhamento
+          <a href="#" class="video-link" data-video="https://www.youtube.com/embed/EFGH5678">
+            📺 Assistir
+          </a>
+        </li>
+        <li>
+          <span class="lesson-number">Aula 03:</span>
+          Instalação do N8N,Ferramentas e credências necessárias.
+          <a href="#" class="video-link" data-video="https://www.youtube.com/embed/IJKL9012">
+            📺 Assistir
+          </a>
+        </li>
+        <li>
+          <span class="lesson-number">Aula 04:</span>
+          Criando base de vídeos, músicas e textos para serem utilizadas nos vídeos
+          <a href="#" class="video-link" data-video="https://www.youtube.com/embed/MNOP3456">
+            📺 Assistir
+          </a>
+        </li>
+        <li>
+          <span class="lesson-number">Aula 05:</span>
+          PCriando vídeo e realizando upload para o Youtube
+          <a href="#" class="video-link" data-video="https://www.youtube.com/embed/QRST7890">
+            📺 Assistir
+          </a>
+        </li>
+        <li>
+          <span class="lesson-number">Aula 06:</span>
+          Bônus - Atualizando textos e descrição dos vídeos com IAbe
+          <a href="#" class="video-link" data-video="https://www.youtube.com/embed/QRST7890">
+            📺 Assistir
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Seção de Doação -->
+    <section class="donation">
+<a href="https://seusite.com/compra" target="_blank" class="buy-now-button">
+  Ajude O Canal Adquirindo O Fluxo Completo + Aulas. Clique Aqui!
+</a>
+    </section>
+
+    <!-- Seção de Contato via WhatsApp -->
+    <section class="contact">
+      <h2>Tem dúvidas? Entre em contato!</h2>
+      <a href="https://wa.me/5511999999999" target="_blank" class="whatsapp-btn">
+        Fale Conosco no WhatsApp
+      </a>
+    </section>
+  </main>
+
+  <!-- Modal para exibir o vídeo -->
+  <div id="videoModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="closeModal">&times;</span>
+      <div class="video-container">
+        <iframe id="videoFrame" src="" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Função para copiar a chave Pix
+    const copyButton = document.getElementById('copyButton');
+    const pixKey = document.getElementById('pixKey');
+    copyButton.addEventListener('click', () => {
+      const tempInput = document.createElement('input');
+      tempInput.value = pixKey.innerText;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempInput);
+      copyButton.innerText = 'Chave Copiada!';
+      setTimeout(() => {
+        copyButton.innerText = 'Copiar Chave Pix';
+      }, 2000);
+    });
+
+    // Lógica para o Modal do vídeo
+    const videoLinks = document.querySelectorAll('.video-link');
+    const videoModal = document.getElementById('videoModal');
+    const closeModal = document.getElementById('closeModal');
+    const videoFrame = document.getElementById('videoFrame');
+
+    videoLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const videoUrl = link.getAttribute('data-video');
+        videoFrame.src = videoUrl;
+        videoModal.style.display = 'block';
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      videoFrame.src = '';
+      videoModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === videoModal) {
+        videoFrame.src = '';
+        videoModal.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
