@@ -398,10 +398,11 @@
     </div>
   </div>
 
-  <script>
-    // Função para copiar a chave Pix
-    const copyButton = document.getElementById('copyButton');
-    const pixKey = document.getElementById('pixKey');
+<script>
+  // Função para copiar a chave Pix
+  const copyButton = document.getElementById('copyButton');
+  const pixKey = document.getElementById('pixKey');
+  if (copyButton && pixKey) {
     copyButton.addEventListener('click', () => {
       const tempInput = document.createElement('input');
       tempInput.value = pixKey.innerText;
@@ -414,32 +415,51 @@
         copyButton.innerText = 'Copiar Chave Pix';
       }, 2000);
     });
+  }
 
-    // Lógica para o Modal do vídeo
-    const videoLinks = document.querySelectorAll('.video-link');
-    const videoModal = document.getElementById('videoModal');
-    const closeModal = document.getElementById('closeModal');
-    const videoFrame = document.getElementById('videoFrame');
+  // Lógica para o Modal do vídeo
+  const videoLinks = document.querySelectorAll('.video-link');
+  const videoModal = document.getElementById('videoModal');
+  const closeModal = document.getElementById('closeModal');
+  const videoFrame = document.getElementById('videoFrame');
 
-    videoLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const videoUrl = link.getAttribute('data-video');
-        videoFrame.src = videoUrl;
-        videoModal.style.display = 'block';
-      });
+  videoLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const baseUrl = link.getAttribute('data-video');
+      let embedUrl = baseUrl;
+
+      // Se for um link do YouTube normal, converter para embed
+      if (baseUrl.includes('youtu.be')) {
+        const videoId = baseUrl.split('youtu.be/')[1].split('?')[0];
+        embedUrl = `https://www.youtube.com/embed/${videoId}`;
+      } else if (baseUrl.includes('youtube.com/watch')) {
+        const params = new URLSearchParams(baseUrl.split('?')[1]);
+        const videoId = params.get('v');
+        if (videoId) {
+          embedUrl = `https://www.youtube.com/embed/${videoId}`;
+        }
+      }
+
+      const videoUrl = embedUrl.includes('?') ? `${embedUrl}&autoplay=1&mute=1` : `${embedUrl}?autoplay=1`;
+      videoFrame.src = videoUrl;
+      videoModal.style.display = 'block';
     });
+  });
 
-    closeModal.addEventListener('click', () => {
+  closeModal.addEventListener('click', () => {
+    videoFrame.src = '';
+    videoModal.style.display = 'none';
+  });
+
+  window.addEventListener('click', (e) => {
+    if (e.target === videoModal) {
       videoFrame.src = '';
       videoModal.style.display = 'none';
-    });
+    }
+  });
+</script>
 
-    window.addEventListener('click', (e) => {
-      if (e.target === videoModal) {
-        videoFrame.src = '';
-        videoModal.style.display = 'none';
-      }
     });
   </script>
 </body>
