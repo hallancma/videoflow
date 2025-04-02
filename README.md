@@ -26,7 +26,7 @@ O **VideoFlow IA** é um projeto gratuito que automatiza a criação de vídeos 
 
 ## 📸 Preview
 
-![preview](https://via.placeholder.com/800x400?text=Preview+do+Projeto+VideoFlow+IA)
+![preview]((https://www.youtube.com/embed/zpcj7h6lBag?autoplay=0&mute=0))
 
 ---
 
